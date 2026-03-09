@@ -38,3 +38,8 @@ print(merged_df)
 #junção externa
 merged_outer = pd.merge(df, sports_df, on='Student ID', how='outer')
 print(merged_outer)
+
+#merged_df = pd.merge(df1, df2, on='common_column') interno
+#merged_df = pd.merge(df1, df2, on='outer') externo
+
+
