@@ -37,9 +37,10 @@ plt.tight_layout()
 plt.show()
 
 #histograma
-
-
-
+df['Preco'].diff().plot(kind='hist', title='Distribuição de alterações diarias de preços', bins=30)
+plt.xlabel('Alteração de preço')
+plt.tight_layout()
+plt.show()
 
 
 
