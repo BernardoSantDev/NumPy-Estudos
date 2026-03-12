@@ -24,12 +24,19 @@ print(voos200)
 nox_lax = df[~df['Origin'].isin(['LAX'])]
 print(nox_lax)
 
-
 #Cenario 3: encontre voos que  incluam LAX como origem
 lax = df[df['Origin'].isin(['LAX'])]
 print(lax)
 
+#Cenario 4: Mais de 100 passageiros e distancia < 1000 milhas
+p_distancia = df[(df['Passengers']>100) & (df['Distance']<1000)]
+print(p_distancia)
 
+#Cenario 5: todos voos de/para NY ou LA
+cidades = df[df['Origin City'].str.contains('New York|Los Angeles') 
+            |df['Destination City'].str.contains('New York|Los Angeles')]
+print(cidades)
 
-
-
+#Cenario 6: Pop origem superios a 1 milhao
+origem = df[(df['Origin Population']>1_000_000)]
+print(origem)
