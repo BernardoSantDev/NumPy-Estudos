@@ -51,3 +51,6 @@ print(voos['Destination City'])
 #Cenario 8: voos com dist > 300 e com mais de 10 voos por mes
 voosp = df.query('Distance < 300 & Flights > 10')
 print(voosp)
+
+# Salvando conjunto de ddos em algum cenatio
+voosp.to_csv('vooslucrativos.csv')
