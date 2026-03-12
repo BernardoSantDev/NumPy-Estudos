@@ -13,3 +13,23 @@ print(df['Origin'].value_counts().head(10))
 #nunique() util para calcular a cardinalidade de um conjunto de dados, ou seja, quantos valores distintos existem
 print(df['Origin'].unique())
 print(df['Origin'].nunique())
+
+
+#Cenario 1: extrair registros de voos apenas no ano 2000
+df['Year'] = df['Fly Date'].astype(str).str.slice(0,4)
+voos200 = df[df['Year'] == '2000']
+print(voos200)
+
+#Cenario 2: encontre voos que nao incluam LAX como origem
+nox_lax = df[~df['Origin'].isin(['LAX'])]
+print(nox_lax)
+
+
+#Cenario 3: encontre voos que  incluam LAX como origem
+lax = df[df['Origin'].isin(['LAX'])]
+print(lax)
+
+
+
+
+
