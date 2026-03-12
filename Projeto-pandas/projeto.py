@@ -40,3 +40,14 @@ print(cidades)
 #Cenario 6: Pop origem superios a 1 milhao
 origem = df[(df['Origin Population']>1_000_000)]
 print(origem)
+
+
+#Cenario 7: Voos com assentos vazios
+voos = df.query('Seats > Passengers')
+print(voos)
+print(voos['Destination City'])
+
+
+#Cenario 8: voos com dist > 300 e com mais de 10 voos por mes
+voosp = df.query('Distance < 300 & Flights > 10')
+print(voosp)
