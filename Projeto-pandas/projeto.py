@@ -80,3 +80,40 @@ aggregated = grouped.agg({'Flights':'sum'})
 sorted_values = aggregated.sort_values(by='Month')
 print(sorted_values)
 
+
+#Colocaremos nossa coluna de distancia e definiremos nossos compartimentos conforme
+#Teremos 0,500,1000,2000,3000,4000
+#e para nosso compartimento final, desejaremos o maximo de nossa coluna de distancia para que nao aja nada apos esse compartimento
+
+distance_bins = pd.cut(df['Distance'], bins=[0,500,1000,2000,3000,4000, df['Distance'].max()])
+
+
+# Agrupe por intervalos de distancia e encontre o total de voos e passageiros para cada categoria de distancia
+grouped_data = df.groupby(distance_bins).agg({'Flights':'sum', 'Passengers':'sum'})
+sorted = grouped_data.sort_values(by='Distance', ascending=False)
+print(sorted)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
