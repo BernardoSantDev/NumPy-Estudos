@@ -95,6 +95,20 @@ print(sorted)
 
 
 
+#Criando graficos
+#Cenario 1 10 aeroportos de origem mais movimentados
+#Agrupando por origem e agregando a soma dos voos
+aeroportos = df.groupby('Origin').agg({'Flights':'sum'})
+#Encontre os 10 aeroportos
+aeroportos_p = aeroportos.nlargest(10, 'Flights')
+#Plote os dados
+aeroportos_p.plot(kind='bar')
+plt.title('Aeroportos mais populares')
+plt.ylabel('Número de voos')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
 
 
 
