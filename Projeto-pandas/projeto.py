@@ -123,9 +123,17 @@ plt.tight_layout()
 plt.show()
 
 
+#Cenario 1: Número de voos a cada ano
+df['Year'] = df['Fly Date'].astype(str).str.slice(0, 4)
+agrupa_ano = df.groupby('Year').agg({'Flights':'sum'})
 
-
-
+#Plote
+agrupa_ano.plot(kind='line')
+plt.title('Total de voos por ano')
+plt.xlabel('Ano')
+plt.ylabel('Voos')
+plt.xticks(rotation=45)
+plt.show()
 
 
 
