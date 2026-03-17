@@ -110,13 +110,17 @@ plt.tight_layout()
 plt.show()
 
 
-
-
-
-
-
-
-
+#Cenario 2: Agrupando por origem e destino
+trafego = df.groupby(['Origin', 'Destination']).agg({'Passengers':'sum'})
+#10 rotas com maior numero de passageiros 
+rotaspopulares = trafego.nlargest(10, 'Passengers')
+#Plote
+rotaspopulares.plot(kind='bar', color='purple')
+plt.title('As 10 rotas mais populares')
+plt.ylabel('Número de passageiros')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
 
 
 
