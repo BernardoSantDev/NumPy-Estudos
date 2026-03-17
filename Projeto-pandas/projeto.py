@@ -163,8 +163,23 @@ plt.tight_layout()
 plt.show()
 
 
+#Grafico de dispersão e histogramas
 
+#Cenario 1: grafico de dispersao de rotas e numero de passageiros
+# 1. Agrupar e resetar o índice imediatamente
+distance_groups = df.groupby(['Origin', 'Destination']).agg({
+    'Distance': 'mean',
+    'Passengers': 'sum'
+}).reset_index()
 
+# 2. Agora o plot vai encontrar 'Distance' e 'Passengers' como colunas
+distance_groups.plot(kind='scatter', x='Distance', y='Passengers', alpha=0.5)
+
+plt.title('Número de passageiros por distância')
+plt.xlabel('Distância')
+plt.ylabel('Número de passageiros')
+plt.tight_layout()
+plt.show()
 
 
 
