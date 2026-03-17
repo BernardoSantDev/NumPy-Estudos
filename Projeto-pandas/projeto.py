@@ -54,3 +54,29 @@ print(voosp)
 
 # Salvando conjunto de ddos em algum cenatio
 voosp.to_csv('vooslucrativos.csv')
+
+
+#Cenario 1 agrupando por origem e destino
+grouped = df.groupby(['Origin', 'Destination'])
+#Aplica e agrega uma função ao grupo
+aggregated = grouped.agg({'Passengers':'sum'})
+#seleciona os valores dessa tabela
+sorted_values = aggregated.sort_values(by='Passengers', ascending=False)
+print(sorted_values.head())
+
+grouped = df.groupby(['Origin', 'Destination'])
+aggregated = grouped.agg({'Passengers':'sum', 'Flights':'sum'})
+sorted_values = aggregated.sort_values(by=['Passengers', 'Flights'], ascending=False)
+print(sorted_values.head())
+
+
+#Cenario 2 agrupando por data de voo
+#Convertendo fly date em datetime e criando mes para agrupamento
+df['Month'] = pd.to_datetime(df['Fly Date'], format='%Y%m').dt.to_period('M')
+# agrupar por mes e agregar soma a coluna voos
+grouped = df.groupby('Month')
+aggregated = grouped.agg({'Flights':'sum'})
+#Classificando por mes
+sorted_values = aggregated.sort_values(by='Month')
+print(sorted_values)
+
