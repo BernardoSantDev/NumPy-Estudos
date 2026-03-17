@@ -136,8 +136,14 @@ plt.xticks(rotation=45)
 plt.show()
 
 
-
-
+#Cenario 2: Agregando o numero de passaageiros por ano
+p_ano = df.groupby('Year').agg({'Flights':'sum', 'Passengers':'sum'})
+p_ano.plot(kind='line')
+plt.title('Total de voos e passageiros por ano')
+plt.xlabel('Ano')
+plt.ylabel('Numero de Voos e passageiros')
+plt.xticks(rotation=45)
+plt.show()
 
 
 
