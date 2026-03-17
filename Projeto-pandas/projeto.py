@@ -182,5 +182,11 @@ plt.tight_layout()
 plt.show()
 
 
-
+#CENARIO 2: plotando a coluna distancia
+df['Distance'].plot(kind='hist')
+plt.title('Distribuição de distâncias')
+plt.xlabel('Distância')
+plt.ylabel('Frequencia')
+plt.tight_layout()
+plt.show()
 
