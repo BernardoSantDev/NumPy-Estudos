@@ -154,4 +154,18 @@ distance_groups.plot(kind='pie', y='Flights', title='Numero de voos por distanci
 plt.tight_layout()
 plt.show()
 
+#Cenario 2 dist dos passageiros por rota 10 rincipais
+route_groupes = df.groupby(['Origin City', 'Destination City']).agg({'Passengers':'sum'})
+#10 rotas com maior numero de passageiros 
+rotaspopulares = route_groupes.nlargest(10, 'Passengers')
+rotaspopulares.plot(kind='pie', y='Passengers', title='Distribuição de passageiros por rota')
+plt.tight_layout()
+plt.show()
+
+
+
+
+
+
+
 
