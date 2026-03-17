@@ -146,6 +146,10 @@ plt.xticks(rotation=45)
 plt.show()
 
 
+#Cenario1 : Distribuição de voos por intervalo de distancia
+
+
+
 
 
 
