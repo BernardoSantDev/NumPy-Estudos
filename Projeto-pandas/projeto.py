@@ -147,9 +147,11 @@ plt.show()
 
 
 #Cenario1 : Distribuição de voos por intervalo de distancia
-
-
-
-
+distance_bins = pd.cut(df['Distance'], bins=[0,500,1000,2000,3000,4000, df['Distance'].max()])
+distance_groups = df.groupby(distance_bins).agg({'Flights':'sum'})
+#Plotagem
+distance_groups.plot(kind='pie', y='Flights', title='Numero de voos por distancia')
+plt.tight_layout()
+plt.show()
 
 
