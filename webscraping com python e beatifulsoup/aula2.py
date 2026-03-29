@@ -16,9 +16,9 @@ else:
     
 soup = BeautifulSoup(response.text, 'html.parser')
 table = soup.find_all('table', class_='wikitable')
-if len(table) > 1:
-    t2 = table[1]
-    print('Segunda tabela encontrada!')
+if len(table) > 2:
+    t2 = table[2]
+    print('Terceira tabela encontrada!')
     rows = t2.find_all('tr')
     for row in rows:
         cells = row.find_all(['th', 'td'])
