@@ -10,14 +10,18 @@ headers = {
 response = requests.get(url, headers=headers)
 
 if response.status_code == 200:
-    print('Pagina carregada com sucesso!')
+    soup = BeautifulSoup(response.text, 'html.parser')
+    table = soup.find('table', class_='wikitable')
+    if table:
+        print('Tabela encontrada!')
+        rows = table.find_all('tr')
+        for row in rows:
+            cells = row.find_all(['th', 'td'])
+            data = [cell.get_text(strip=True) for cell in cells]
+            print(data)
+    else:
+        print('Tabela não encontrada')
 else:
     print('Erro ao carregar pagina', response.status_code)
-
-soup = BeautifulSoup(response.text, 'html.parser')
-print(soup.prettify())
-
-
-
 
 
