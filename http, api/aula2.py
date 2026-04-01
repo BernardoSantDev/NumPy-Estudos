@@ -13,3 +13,9 @@ dados = resposta.json()
 print("Tipo de 'dados':", type(dados))
 print("Conteúdo de 'dados':" , dados)
 print("Título do Post:", dados['title'])
+
+#dados
+print(resposta.status_code)
+print(resposta.headers)
+print(resposta.url)
+print(resposta.text)
