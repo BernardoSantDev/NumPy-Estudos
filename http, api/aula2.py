@@ -37,3 +37,16 @@ print("Status code:", resposta.status_code)
 comentarios = resposta.json()
 print("Quantidade de comentários retornados:", len(comentarios))
 print("Primeiro comentário:", comentarios[0])
+
+
+#Tratamento de erros
+#TRATAMENTO1
+url = "https://jsonplaceholder.typicode.com/posts/1"
+resposta = requests.get(url)
+
+if resposta.status_code == 200:
+    dados = resposta.json()
+    print("Título:", dados["title"])
+else:
+    print("Falha ao buscar dados. Código:", resposta.status_code)
+
