@@ -61,3 +61,19 @@ try:
     print("Título:", dados["title"])
 except requests.exceptions.HTTPError as e:
     print("Ocorreu um erro HTTP:", e)
+
+
+#TRATAMENTO3
+
+url = "https://jsonplaceholder.typicode.com/posts/1"
+
+try:
+    resposta = requests.get(url, timeout=5)  # espera no máximo 5 segundos
+    resposta.raise_for_status()
+    dados = resposta.json()
+    print("Título:", dados["title"])
+except requests.exceptions.Timeout:
+    print("A requisição demorou demais e foi cancelada (timeout).")
+except requests.exceptions.RequestException as e:
+    print("Erro ao fazer requisição:", e)
+
