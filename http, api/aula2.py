@@ -50,3 +50,14 @@ if resposta.status_code == 200:
 else:
     print("Falha ao buscar dados. Código:", resposta.status_code)
 
+
+#TRATAMENTO2
+url = "https://jsonplaceholder.typicode.com/posts/1"
+resposta = requests.get(url)
+
+try:
+    resposta.raise_for_status()  # se não for 2xx, lança erro
+    dados = resposta.json()
+    print("Título:", dados["title"])
+except requests.exceptions.HTTPError as e:
+    print("Ocorreu um erro HTTP:", e)
