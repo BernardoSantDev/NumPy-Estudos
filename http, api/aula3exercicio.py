@@ -27,3 +27,36 @@ print(f"Juiz de Fora moram {len([u for u in usuarios if u['cidade'] == 'Juiz de 
 for u in usuarios:
     if (u["cidade"] == "Juiz de Fora"):
         print(u["nome"])
+
+
+loja = {
+    "nome": "Codi Tech Store",
+    "produtos": [
+        {
+            "id": 1,
+            "nome": "Notebook",
+            "preco": 3500.0,
+            "categorias": ["eletrônicos", "computadores"],
+            "disponivel": True
+        },
+        {
+            "id": 2,
+            "nome": "Headset Gamer",
+            "preco": 300.0,
+            "categorias": ["eletrônicos", "áudio"],
+            "disponivel": False
+        },
+        {
+            "id": 3,
+            "nome": "Webcam Full HD",
+            "preco": 200.0,
+            "categorias": ["eletrônicos", "vídeo"],
+            "disponivel": True
+        }
+    ]
+}
+
+
+
+
+print(f'O nome da loja é {loja['nome']}')
