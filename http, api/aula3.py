@@ -96,4 +96,29 @@ for membro in filme["elenco"]:
 
 
 
-    
+#EXEMPLO COMPLETO simulando resposta de API
+
+resposta_api = {
+    "loja": "Tech Store",
+    "cidade": "São Paulo",
+    "itens": [
+        {"id": 1, "nome": "Teclado Mecânico", "preco": 250.0, "estoque": 10},
+        {"id": 2, "nome": "Mouse Gamer",      "preco": 150.0, "estoque": 0},
+        {"id": 3, "nome": "Monitor 24\"",     "preco": 900.0, "estoque": 5}
+    ]
+}
+
+
+print("Loja:", resposta_api["loja"])
+print("Cidade:", resposta_api["cidade"])
+
+print("\nLista de itens:")
+for item in resposta_api["itens"]:
+    nome = item["nome"]
+    preco = item["preco"]
+    estoque = item["estoque"]
+
+    # Texto mais amigável
+    status_estoque = "disponível" if estoque > 0 else "sem estoque"
+
+    print(f"- {nome} | R${preco:.2f} | {status_estoque}")
