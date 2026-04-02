@@ -11,5 +11,7 @@ from pandas import json_normalize
 
 url = "https://jsonplaceholder.typicode.com/users"
 resposta = requests.get(url)
-resposta.rayse_for_status()
+resposta.raise_for_status()
 dados = resposta.json()
+print(type(dados))
+df = json_normalize(dados)
