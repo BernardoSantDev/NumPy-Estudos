@@ -72,4 +72,5 @@ for item in loja["produtos"]:
     
     print(f" - {nome} - R${preco:.2f} - {status_estoque}")
     
-    
+produtos_disponiveis = [p['nome'] for p in loja["produtos"] if p["disponivel"] == True]
+print(produtos_disponiveis)
