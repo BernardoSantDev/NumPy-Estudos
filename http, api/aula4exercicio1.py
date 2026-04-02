@@ -12,3 +12,4 @@ from pandas import json_normalize
 url = "https://jsonplaceholder.typicode.com/users"
 resposta = requests.get(url)
 resposta.rayse_for_status()
+dados = resposta.json()
