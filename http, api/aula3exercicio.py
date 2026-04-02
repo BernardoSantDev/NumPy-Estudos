@@ -74,3 +74,12 @@ for item in loja["produtos"]:
     
 produtos_disponiveis = [p['nome'] for p in loja["produtos"] if p["disponivel"] == True]
 print(produtos_disponiveis)
+
+
+# Calcule o preço médio dos produtos disponíveis
+
+precos_disponiveis = [p['preco'] for p in loja["produtos"] if p["disponivel"] == True]
+if len(precos_disponiveis) > 0:
+    preco_medio = sum(precos_disponiveis) / len(precos_disponiveis)
+    print(f"Preço médio dos produtos disponíveis: R${preco_medio:.2f}")
+
