@@ -20,3 +20,58 @@ print(df_produtos.head())
 
 precos_disponiveis = df_produtos.loc[df_produtos['em_estoque'] == 'Sim', 'preco'].mean()
 print(precos_disponiveis)
+
+
+
+
+usuarios = [
+    {
+        "id": 1,
+        "nome": "Ana",
+        "endereco": {
+            "cidade": "Juiz de Fora",
+            "estado": "MG"
+        },
+        "planos": ["básico", "data-science"]
+    },
+    {
+        "id": 2,
+        "nome": "Bruno",
+        "endereco": {
+            "cidade": "São Paulo",
+            "estado": "SP"
+        },
+        "planos": ["premium"]
+    },
+    {
+        "id": 3,
+        "nome": "Carla",
+        "endereco": {
+            "cidade": "Rio de Janeiro",
+            "estado": "RJ"
+        },
+        "planos": ["básico"]
+    }
+]
+
+
+df = json_normalize(usuarios)
+print("Colunas disponíveis:", df.columns.tolist())
+
+colunas_interesse = [
+    "id",
+    "nome",
+    "endereco.cidade",
+    "endereco.estado"]
+
+df_simplificado = df[colunas_interesse].rename(
+    columns={
+        "endereco.cidade": "cidade",
+        "endereco.estado": "estado"
+    }
+)
+print(df_simplificado.head())
+
+filtro = df['planos'].astype(str).str.contains('data-science')
+df_data_science = df[filtro]
+print(df_data_science)
