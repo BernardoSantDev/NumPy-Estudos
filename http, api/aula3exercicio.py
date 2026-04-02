@@ -60,3 +60,16 @@ loja = {
 
 
 print(f'O nome da loja é {loja['nome']}')
+
+
+print("\n Lista de Itens")
+for item in loja["produtos"]:
+    nome = item["nome"]
+    preco = item["preco"]
+    estoque = item["disponivel"]
+
+    status_estoque = "Disponivel" if estoque == True else "Indisponivel"
+    
+    print(f" - {nome} - R${preco:.2f} - {status_estoque}")
+    
+    
