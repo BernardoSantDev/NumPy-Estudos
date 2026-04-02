@@ -15,3 +15,12 @@ resposta.raise_for_status()
 dados = resposta.json()
 print(type(dados))
 df = json_normalize(dados)
+print(df.head())
+colunas_interesse = [
+    "id",
+    "name",
+    "email",
+    "address.city",
+    "address.street",
+    "company.name"
+]
