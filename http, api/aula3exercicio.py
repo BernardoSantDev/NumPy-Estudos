@@ -14,3 +14,5 @@ for item in usuarios:
 
     print(f"{nome} ({idade} anos) - {cidade}")
 
+usuarios_jf = [u for u in usuarios if u["cidade"] == "Juiz de Fora"]
+print(usuarios_jf)
