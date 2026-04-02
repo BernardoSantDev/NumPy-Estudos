@@ -33,3 +33,7 @@ df_simplificado = df[colunas_interesse].rename(
     }
 )
 
+print("\nDataFrame simplificado:")
+print(df_simplificado.head())
+print("\nInfo:")
+print(df_simplificado.info())
