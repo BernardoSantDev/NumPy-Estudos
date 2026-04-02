@@ -10,4 +10,13 @@ produtos = [
 ]
 
 df_produtos = pd.DataFrame(produtos)
-print(df_produtos)
+print(df_produtos.head())
+print(df_produtos.info())
+
+import numpy as np
+df_produtos['em_estoque'] = np.where(df_produtos['estoque'] > 0, 'Sim', 'Não')
+print(df_produtos.head())
+
+
+precos_disponiveis = df_produtos.loc[df_produtos['em_estoque'] == 'Sim', 'preco'].mean()
+print(precos_disponiveis)
