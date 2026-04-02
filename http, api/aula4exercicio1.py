@@ -24,3 +24,12 @@ colunas_interesse = [
     "address.street",
     "company.name"
 ]
+df_simplificado = df[colunas_interesse].rename(
+    columns={
+        "name": "nome",
+        "address.city": "cidade",
+        "address.street": "rua",
+        "company.name": "empresa"
+    }
+)
+
