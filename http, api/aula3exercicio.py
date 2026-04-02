@@ -16,3 +16,14 @@ for item in usuarios:
 
 usuarios_jf = [u for u in usuarios if u["cidade"] == "Juiz de Fora"]
 print(usuarios_jf)
+
+print(f"Juiz de Fora moram {len(usuarios_jf)} pessoas.")
+for u in usuarios_jf:
+    nomejf = u["nome"]
+    print(f"Nome: {nomejf}")
+
+print(f"Juiz de Fora moram {len([u for u in usuarios if u['cidade'] == 'Juiz de Fora'])} pessoas.")
+
+for u in usuarios:
+    if (u["cidade"] == "Juiz de Fora"):
+        print(u["nome"])
