@@ -42,3 +42,76 @@ print(f"Média aplicada: {media}")
 print(df)
 
 
+
+
+
+
+
+
+
+dados_vendas = [
+    {"id_venda": 1, "produto": "Teclado", "valor": "200",  "quantidade": 1},
+    {"id_venda": 2, "produto": "Mouse",   "valor": "150",  "quantidade": 2},
+    {"id_venda": 3, "produto": "Monitor", "valor": None,   "quantidade": 1},
+    {"id_venda": 4, "produto": "Cadeira", "valor": "800",  "quantidade": None},
+    {"id_venda": 5, "produto": "Headset", "valor": "abc",  "quantidade": 1}
+]
+df = pd.DataFrame(dados_vendas)
+print(df)
+
+
+df['valor'] = pd.to_numeric(df['valor'], errors="coerce")
+df['quantidade'] = pd.to_numeric(df['quantidade'], errors="coerce").astype("Int64")
+df["valor"] = df["valor"].fillna(round(df["valor"].mean()))
+df["quantidade"] = df["quantidade"].fillna(1)
+df["total"] = df['valor'] * df['quantidade']
+condicoes = [
+    df["valor"] < 200,
+    (df["valor"] >= 200) & (df["valor"] < 500),
+    df["valor"] >= 500
+]
+valores = ['Barato', 'Médio', 'Caro']
+df["categora_preco"] = np.select(condicoes, valores, default="Desconecido")
+print(df)
+
+df = df.sort_values(by='total', ascending=False)
+print(df)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
