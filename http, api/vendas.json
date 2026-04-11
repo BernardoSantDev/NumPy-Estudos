@@ -1,0 +1,4 @@
+[
+  {"id_venda": 1, "produto": "Teclado", "valor": 200.0},
+  {"id_venda": 2, "produto": "Mouse",   "valor": 150.0}
+]
