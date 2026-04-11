@@ -1,1 +1,1 @@
-s
+# Integrando Múltiplas Fontes de Dados (APIs + Arquivos)
