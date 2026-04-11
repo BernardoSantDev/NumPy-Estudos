@@ -56,8 +56,17 @@ print(df_livros)
 
 
 
+#Lendo CSV de arquivo local
 
+import pandas as pd
 
+df_csv = pd.read_csv("vendas.csv")
+print(df_csv)
+print(df_csv.info())
+#Se o separador for ;:
+df_csv = pd.read_csv("vendas_ponto_virgula.csv", sep=";")
+#Se precisar especificar encoding:
+df_csv = pd.read_csv("vendas.csv", encoding="utf-8")
 
 
 
