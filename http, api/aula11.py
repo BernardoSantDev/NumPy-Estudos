@@ -48,8 +48,35 @@ print(df_merged)
 #left → tudo da esquerda, mais o que bater da direita
 #outer → união de tudo
 
+#4. Exemplo de cenário: API + CSV local
+#Vamos montar um cenário didático:
 
+#API (simulada): retorna temperatura atual por cidade.
+#CSV local: contém cidades com população e meta de vendas.
+#4.1 Dados da “API” (simulados)
+#Imagine que você fez uma requisição a uma API de clima e obteve algo assim (já convertido para DataFrame):
 
+import pandas as pd
+
+df_clima = pd.DataFrame([
+    {"cidade": "Juiz de Fora", "temp_atual": 24.5},
+    {"cidade": "São Paulo",    "temp_atual": 19.0},
+    {"cidade": "Rio de Janeiro","temp_atual": 27.3},
+])
+print(df_clima)
+
+#4.2 CSV local com metas (simulado)
+#Suponha um CSV metas_cidades.csv com:
+
+#cidade,regiao,populacao,meta_vendas
+#Juiz de Fora,Sudeste,573285,50000
+#São Paulo,Sudeste,12300000,300000
+#Rio de Janeiro,Sudeste,6718903,200000
+#Belo Horizonte,Sudeste,2521564,150000
+#Lendo no pandas:
+
+df_metas = pd.read_csv("metas_cidades.csv")
+print(df_metas)
 
 
 
