@@ -95,8 +95,69 @@ print(df_todos)
 
 
 
+#Exemplo de integração: JSON + XML (relacionando por chave)
+#Outro cenário bem comum:
+#Um arquivo JSON com cadastros de clientes.
+#Um arquivo XML com pedidos que referenciam esses clientes por um id_cliente.
 
+#Clientes em JSON → DataFrame
+import pandas as pd
 
+df_clientes = pd.read_json("clientes.json")
+print(df_clientes)
+
+# Pedidos em XML → DataFrame
+
+import xml.etree.ElementTree as ET
+import pandas as pd
+
+tree = ET.parse("pedidos.xml")
+root = tree.getroot()
+
+lista_pedidos = []
+
+for p in root.findall("pedido"):
+    lista_pedidos.append({
+        "id_pedido": int(p.attrib.get("id")),
+        "id_cliente": int(p.attrib.get("id_cliente")),
+        "valor": float(p.attrib.get("valor"))
+    })
+
+df_pedidos = pd.DataFrame(lista_pedidos)
+print(df_pedidos)
+
+#Agora temos:
+#df_clientes: info dos clientes.
+#df_pedidos: info dos pedidos (com id_cliente).
+
+#7.3 Integrando com pd.merge (JOIN)
+#Queremos um DataFrame com:
+#nome do cliente
+#cidade
+#id do pedido
+#valor
+#Isso é um join: unir tabelas pelo campo em comum id_cliente.
+
+df_completo = pd.merge(
+    df_pedidos,
+    df_clientes,
+    on="id_cliente",      # coluna em comum nas duas tabelas
+    how="left"            # tipo de join
+)
+
+print(df_completo)
+
+#Tipo de join:
+#how="inner" → só linhas que existem nos dois lados.
+#how="left" → todas as linhas de df_pedidos, preenchendo cliente onde houver correspondência.
+#how="right" → todas de df_clientes.
+#how="outer" → união de todos, preenchendo com NaN onde não houver match.
+#No nosso caso left faz sentido, pois:
+#Para cada pedido, queremos trazer os dados do cliente (se existir).
+#Agora você consegue:
+#Agrupar por nome para ver total de pedidos.
+#Agrupar por cidade.
+#Calcular ticket médio por cliente.
 
 
 
