@@ -1,0 +1,12 @@
+<catalogo>
+  <livro id="1">
+    <titulo>Introdução ao Python</titulo>
+    <autor>Ana Silva</autor>
+    <preco>79.90</preco>
+  </livro>
+  <livro id="2">
+    <titulo>Data Science com Pandas</titulo>
+    <autor>Bruno Souza</autor>
+    <preco>99.50</preco>
+  </livro>
+</catalogo>
