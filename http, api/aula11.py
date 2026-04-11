@@ -79,6 +79,47 @@ df_metas = pd.read_csv("metas_cidades.csv")
 print(df_metas)
 
 
+#Estratégias de chave de junção
+#A chave de junção é a coluna que “liga” as tabelas.
+
+#Casos comuns:
+
+#IDs numéricos (id_cliente, id_cidade, id_produto).
+#Nomes (cidade, estado, categoria).
+#Códigos oficiais (IBGE, SKU, ISO, etc.).
+#Boas práticas:
+#Prefira IDs estáveis (códigos numéricos ou strings únicas).
+#Evite depender só de nome (pode ter variações de grafia, acentos, maiúsculas/minúsculas).
+#Quando for usar nome, tente padronizar:
+#str.strip() (tirar espaços).
+#str.title() ou str.upper() (padronizar caixa).
+#No nosso exemplo, vamos usar a coluna "cidade" como chave, mas com cuidado.
+
+#6. Tratando discrepâncias nas chaves
+#Problemas típicos:
+
+#Nome escrito de formas diferentes:
+#"sao paulo", "São Paulo", "SÃO PAULO".
+#Espaços extras:
+#"Juiz de Fora " vs "Juiz de Fora".
+#Cidades presentes no CSV e ausentes na API (ou vice-versa).
+#6.1 Padronização simples
+#Antes do merge, podemos:
+## Padronizar nome da cidade nas duas tabelas
+df_clima["cidade"] = df_clima["cidade"].str.strip().str.title()
+df_metas["cidade"] = df_metas["cidade"].str.strip().str.title()
+#Assim:
+#"São Paulo", "SÃO PAULO", " sao paulo " → "São Paulo"
+
+#6.2 Fazendo o merge
+df_integrado = pd.merge(
+    df_metas,
+    df_clima,
+    on="cidade",
+    how="left"    # mantemos todas as cidades do CSV
+)
+
+print(df_integrado)
 
 
 
