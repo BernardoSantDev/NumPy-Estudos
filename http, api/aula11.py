@@ -123,7 +123,21 @@ print(df_integrado)
 
 
 
+#7. Lidando com dados faltantes pós-merge
+#Depois do merge, você precisa decidir o que fazer com colunas que vieram com NaN:
 
+#Eles significam:
+#Não existe informação naquela fonte para aquela chave.
+#Erro de digitação / chave não bateu.
+#7.1 Estratégias possíveis
+#Remover linhas sem dados complementares:
+df_sem_nan = df_integrado.dropna(subset=["temp_atual"])
+#Preencher com valor padrão:
+#Ex: 0, "Desconhecido", média, etc.
+df_integrado["temp_atual"] = df_integrado["temp_atual"].fillna(-999)
+#Investigar manualmente:
+#Pode ser que o problema seja no cadastro (nome errado, cidade não coberta pela API, etc.).
+#No nosso exemplo, pode fazer sentido manter Belo Horizonte, mas marcar que não temos clima para ela.
 
 
 
