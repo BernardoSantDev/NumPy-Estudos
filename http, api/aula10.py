@@ -24,3 +24,52 @@ print(df_vendas.info())
 
 json_string = '[{"id": 1, "nome": "Ana"}, {"id": 2, "nome": "Bruno"}]'
 df = pd.read_json(json_string)
+
+
+
+
+#Lendo XML de arquivo local
+#Lendo com ET.parse
+import xml.etree.ElementTree as ET
+
+tree = ET.parse("catalogo.xml")  # carrega o arquivo
+root = tree.getroot()           # obtém tag raiz
+
+print(root.tag)  # 'catalogo'
+#Transformando em lista de dicionários e DataFrame
+import pandas as pd
+
+livros = []
+
+for livro in root.findall("livro"):
+    dados_livro = {
+        "id": int(livro.attrib.get("id")),
+        "titulo": livro.find("titulo").text.strip(),
+        "autor": livro.find("autor").text.strip(),
+        "preco": float(livro.find("preco").text)
+    }
+    livros.append(dados_livro)
+
+df_livros = pd.DataFrame(livros)
+print(df_livros)
+#Arquivo XML local → ET.parse → root → lista de dicionários → pd.DataFrame.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
