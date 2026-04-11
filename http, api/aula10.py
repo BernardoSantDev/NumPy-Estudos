@@ -13,3 +13,14 @@ import pandas as pd
 
 df_vendas = pd.DataFrame(dados)
 print(df_vendas)
+
+#Usando pandas.read_json direto
+import pandas as pd
+
+df_vendas = pd.read_json("vendas.json")
+print(df_vendas)
+print(df_vendas.info())
+#Você também pode ler JSON de string:
+
+json_string = '[{"id": 1, "nome": "Ana"}, {"id": 2, "nome": "Bruno"}]'
+df = pd.read_json(json_string)
