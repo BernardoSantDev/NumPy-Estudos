@@ -70,7 +70,28 @@ df_csv = pd.read_csv("vendas.csv", encoding="utf-8")
 
 
 
+#Exemplo de integração: API + CSV
+#Cenário realista:
+#Você tem dados novos de vendas vindos de uma API em JSON.
+#Você tem um arquivo antigo vendas_anteriores.csv local.
+#Quer juntar tudo em um único DataFrame.
+#Supor dados da API (já em DataFrame)
+import pandas as pd
 
+# Dados "novos" (por exemplo, vieram de uma API agora e você já transformou em DataFrame)
+dados_novos = [
+    {"id_venda": 4, "produto": "Cadeira Gamer", "valor": 1200.0},
+    {"id_venda": 5, "produto": "Monitor 24\"",  "valor": 900.0}
+]
+df_novos = pd.DataFrame(dados_novos)
+#Ler CSV antigo
+df_antigos = pd.read_csv("vendas_anteriores.csv")
+#Juntar linhas com pd.concat
+#Quando os dados têm as mesmas colunas e você quer “empilhar”, use concat.
+df_todos = pd.concat([df_antigos, df_novos], ignore_index=True)
+print(df_todos)
+#ignore_index=True recria o índice (0, 1, 2…).
+#Agora você tem histórico + novos dados no mesmo DataFrame.
 
 
 
