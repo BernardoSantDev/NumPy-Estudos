@@ -162,5 +162,29 @@ print(df_completo)
 
 
 
+#8. Integrando várias fontes: mini projeto
+#Imagine o cenário:
 
+#Você tem:
+#clientes.json (cadastro de clientes).
+#pedidos_api.json (novos pedidos da API).
+#pedidos_antigos.xml (pedidos antigos num XML legado).
+#Quer gerar um único DataFrame com todos os pedidos + info dos clientes.
+#Fluxo (simplificado):
+
+#Clientes:
+#Ler clientes.json → df_clientes.
+#Pedidos novos (JSON):
+#Ler pedidos_api.json → df_novos.
+#Pedidos antigos (XML):
+#Ler pedidos_antigos.xml com ET.parse.
+#Transformar em lista de dicionários → df_antigos.
+#Juntar pedidos:
+#df_pedidos = pd.concat([df_novos, df_antigos], ignore_index=True).
+#Relacionar com clientes:
+#df_completo = pd.merge(df_pedidos, df_clientes, on="id_cliente", how="left").
+#Analisar / salvar:
+#Agrupar por cliente, por cidade, etc.
+#Salvar em relatorio_pedidos_completo.csv.
+#Esse padrão de projeto é muito comum em Data Science / Engenharia de Dados.
 
