@@ -36,6 +36,14 @@ if df["renda"].isna().sum() > 0:
 print("Ausentes em renda depois:", df["renda"].isna().sum()) 
 
 
+#SEPARANDO FEATURES
+y = df["churn"]
+X = df.drop("churn", axis=1)
+
+coluna_descartar = ['id_cliente']
+X = X.drop(columns=[c for c in coluna_descartar if c in X.columns])
+print(X.columns.tolist())
+
 
 
 
