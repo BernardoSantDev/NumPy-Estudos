@@ -21,12 +21,19 @@ from sklearn.metrics import (
 
 
 
+#CARREGANDO DADOS
+df = pd.read_csv("clientes_churn.csv")
+print("Primeiras linhas:")
+print(df.head())
+print("Informações do DataFrame:")
+print(df.info())    
+print("Estatísticas descritivas:")
+print(df.describe())
 
-
-
-
-
-
+print(df.isna().sum())
+if df["renda"].isna().sum() > 0:
+    df["renda"] = df["renda"].fillna(df["renda"].median())
+print("Ausentes em renda depois:", df["renda"].isna().sum()) 
 
 
 
