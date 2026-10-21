@@ -126,3 +126,31 @@ print("\nResumo dos modelos:\n")
 print(resultado_df)
 
 
+
+
+#INSPECIONA O MELHOR MNODELO EM MAIS DETALHES
+melhor_nome = resultado_df.sort_values("f1", ascending=False).iloc[0]["modelo"]
+print(f"\nMelhor modelo (pelo F1): {melhor_nome}")
+melhor_pipeline = pipelines[melhor_nome]
+y_pred_melhor = melhor_pipeline.predict(X_teste)
+print("\nMatriz de confusão:")
+print(confusion_matrix(y_teste, y_pred_melhor))
+print("\nRelatório de classificação:")
+print(classification_report(y_teste, y_pred_melhor,zero_division=0))
+if melhor_nome == "RandomForest":
+    # Pegando o modelo interno já treinado:
+    modelo_rf = melhor_pipeline.named_steps["modelo"]
+
+    # Nome das colunas após o preprocessamento (num + one-hot)
+    # Para simplificar, vamos mostrar apenas importâncias totais,
+    # mas em produção você mapeia as colunas transformadas.
+    importancias = modelo_rf.feature_importances_
+    print("\nNúmero de features após transformações:", len(importancias))
+if melhor_nome == "RandomForest" and len(colunas_categoricas) == 0:
+    importancias_df = pd.DataFrame({
+        "feature": colunas_numericas,
+        "importancia": modelo_rf.feature_importances_
+    }).sort_values("importancia", ascending=False)
+
+    print("\nImportância das variáveis (aprox.):")
+    print(importancias_df)
