@@ -46,8 +46,16 @@ print(X.columns.tolist())
 
 
 
+#SEPARANDO TREINO E TESTE
+X_treino, X_teste, y_treino, y_teste = train_test_split(
+    X, y,
+    test_size=0.2,
+    random_state=42,
+    stratify=y            # manter proporção de classes (se possível)
+)
 
-
+print("Tamanho treino: ", X_treino.shape)
+print("Tamanho teste: ", X_teste.shape)
 
 
 
