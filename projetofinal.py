@@ -59,5 +59,35 @@ print("Tamanho teste: ", X_teste.shape)
 
 
 
+#DEFININDO MODELOS
+from sklearn.compose import ColumnTransformer
+# Separamos colunas numéricas e (opcional) categóricas
+colunas_numericas = X_treino.select_dtypes(include=[np.number]).columns.tolist()
+colunas_categoricas = X_treino.select_dtypes(exclude=[np.number]).columns.tolist()
+# Para simplificar, vamos:
+# - escalonar apenas as numéricas
+# - transformar categóricas com one-hot encoding (se houver)
+from sklearn.preprocessing import OneHotEncoder
+preprocessador = ColumnTransformer(
+    transformers=[
+        ("num", StandardScaler(), colunas_numericas),
+        ("cat", OneHotEncoder(handle_unknown="ignore"), colunas_categoricas)
+    ]
+)
+modelos = {
+    "LogisticRegression": LogisticRegression(max_iter=500),
+    "RandomForest": RandomForestClassifier(
+        n_estimators=100,
+        random_state=42
+    ),
+    "KNN": KNeighborsClassifier(n_neighbors=5)
+}
+from sklearn.pipeline import Pipeline
 
+pipelines = {}
 
+for nome, modelo in modelos.items():
+    pipelines[nome] = Pipeline(steps=[
+        ("preprocessamento", preprocessador),
+        ("modelo", modelo)
+    ])
