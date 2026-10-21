@@ -1,3 +1,7 @@
+import os
+os.environ["LOKY_MAX_CPU_COUNT"] = "4" 
+import sys; sys.stdout.reconfigure(encoding="utf-8")
+
 import pandas as pd
 import numpy as np
 
@@ -83,11 +87,42 @@ modelos = {
     "KNN": KNeighborsClassifier(n_neighbors=5)
 }
 from sklearn.pipeline import Pipeline
-
 pipelines = {}
-
 for nome, modelo in modelos.items():
     pipelines[nome] = Pipeline(steps=[
         ("preprocessamento", preprocessador),
         ("modelo", modelo)
     ])
+
+
+#TREINO E AVALIAÇÃO DE CADA MODELO
+resultados = []
+for nome, pipe in pipelines.items():
+    print(f"\nTreinando modelo: {nome}")
+    pipe.fit(X_treino, y_treino)
+
+    y_pred = pipe.predict(X_teste)
+
+    acc  = accuracy_score(y_teste, y_pred)
+    prec = precision_score(y_teste, y_pred, zero_division=0)
+    rec  = recall_score(y_teste, y_pred, zero_division=0)
+    f1   = f1_score(y_teste, y_pred, zero_division=0)
+
+    resultados.append({
+        "modelo": nome,
+        "accuracy": acc,
+        "precision": prec,
+        "recall": rec,
+        "f1": f1
+    })
+
+    print(f"Acurácia:  {acc:.3f}")
+    print(f"Precisão:  {prec:.3f}")
+    print(f"Recall:    {rec:.3f}")
+    print(f"F1-score:  {f1:.3f}")
+
+resultado_df = pd.DataFrame(resultados)
+print("\nResumo dos modelos:\n")
+print(resultado_df)
+
+
