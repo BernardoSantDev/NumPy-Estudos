@@ -154,3 +154,47 @@ if melhor_nome == "RandomForest" and len(colunas_categoricas) == 0:
 
     print("\nImportância das variáveis (aprox.):")
     print(importancias_df)
+
+
+
+
+#VE A IMPORTANCIA DAS COLUNAS
+modelo_rf = melhor_pipeline.named_steps["modelo"]
+nomes = melhor_pipeline.named_steps["preprocessamento"].get_feature_names_out()
+imp = pd.DataFrame({"feature": nomes, "importancia": modelo_rf.feature_importances_})
+# tira o prefixo num__/cat__ e junta o one-hot na variável original
+imp["variavel"] = imp["feature"].str.replace(r"^(num|cat)__", "", regex=True)
+for c in colunas_categoricas:
+    imp.loc[imp["variavel"].str.startswith(c + "_"), "variavel"] = c
+print(imp.groupby("variavel")["importancia"].sum().sort_values(ascending=False).round(3))
+# direção do efeito: média de cada variável por grupo
+print(
+    df.groupby("churn")[["nota_satisfacao", "uso_mensal_horas", "qtd_chamados_suporte",
+                         "meses_como_cliente", "atrasos_pagamento_12m"]]
+      .mean().round(2).T
+)
+
+# ============================================================
+# 7. MINI RELATÓRIO PARA A GESTÃO
+# ============================================================
+#
+# Testamos três modelos (Regressão Logística, Random Forest e KNN) para
+# prever cancelamento de clientes a partir de perfil, uso e atendimento.
+# O melhor F1 foi o da Random Forest (0,68), com acurácia de 0,84,
+# precisão de 0,76 e recall de 0,62.
+#
+# Na prática, o modelo identifica cerca de 62% dos clientes que de fato
+# cancelam (34 de 55 no teste) e, quando sinaliza um cancelamento, acerta
+# em 76% das vezes.
+#
+# As variáveis mais importantes foram a nota de satisfação, o uso mensal,
+# a quantidade de chamados ao suporte e o tempo como cliente: quem
+# cancela tem notas menores, usa menos o serviço, procura mais o suporte
+# e é cliente há menos tempo.
+#
+# Sugerimos gerar semanalmente uma lista de clientes com alta
+# probabilidade de cancelar e priorizar ações de retenção (contato
+# proativo, ofertas) para quem tem nota baixa e muitos chamados.
+#
+# Como limitação, a base é simulada e o modelo ainda deixa escapar cerca
+# de 4 em cada 10 cancelamentos.
